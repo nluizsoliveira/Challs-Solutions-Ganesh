@@ -338,4 +338,17 @@ S=A.H&^
 ## bandit10 -> bandit11
 The password for the next level is stored in the file data.txt, which contains base64 encoded data
 
-### Ganesh bandit11 password: 
+According to https://linuxhint.com/bash_base64_encode_decode/, it's possible to use `base64` script with flag `--decode` to decode a file. Simply redirect `cat` output to decode. 
+
+```bash
+cat data.txt | base64 --decode
+```
+### Ganesh bandit11 password: IFukwKGsFW8MOq3IRFqrxE1hxTNEbUPR
+
+---------------------------------------------------------------
+## bandit11 -> bandit12
+The password for the next level is stored in the file data.txt, where all lowercase (a-z) and uppercase (A-Z) letters have been rotated by 13 positions
+```bash
+cat data.txt | base64 --decode
+```
+### Ganesh bandit12 password: 
