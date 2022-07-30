@@ -348,7 +348,17 @@ cat data.txt | base64 --decode
 ---------------------------------------------------------------
 ## bandit11 -> bandit12
 The password for the next level is stored in the file data.txt, where all lowercase (a-z) and uppercase (A-Z) letters have been rotated by 13 positions
+
+according to the wiki article, the command **tr** replaces a letter for other. Therefore, using de regex range sintax it's possible to generate two alphabets, the second one shifted 13 positions, and pass it to tr. THerefore, 
 ```bash
-cat data.txt | base64 --decode
+cat data.txt | tr 'A-Za-z' 'N-ZA-Mn-za-m'
 ```
-### Ganesh bandit12 password: 
+### Ganesh bandit12 password: 5Te8Y4drgCRfCx8ugdwuEX8KFC6k2EUu
+
+---------------------------------------------------------------
+## bandit12 -> bandit13
+A senha para o próximo nível está armazenada no arquivo "data.txt", o qual é um "hexdump" de um arquivo que foi comprimido repetidas vezes. Para esse nível pode ser útil criar um diretório na pasta "/tmp". Para isso é possível usar o comando "mkdir", por exemplo: "mkdir /tmp/myname123", e então copiar o arquivo de dados usando "cp", e renomeá-lo usando "mv" (leia as páginas de manual!)
+
+
+### Ganesh bandit13 password: 
+
