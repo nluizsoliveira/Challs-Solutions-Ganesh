@@ -115,20 +115,24 @@ to find it. It's named `.hidden`. `Cat` it.
 ## Bandit 4-> 5 (Ganesh bandit5)
 The password for the next level is stored in the only human-readable file in the inhere directory. Tip: if your terminal is messed up, try the “reset” command.
 
+Enter bandit4 user
+```
+ssh bandit4@bandit.labs.overthewire.org -p 2220
+```
+
 There are 9 files in the folder: 
 ```
 ls
 -file00  -file02  -file04  -file06  -file08
 -file01  -file03  -file05  -file07  -file09
 ```
-I searched about doing a for in bash, printing variables and printing newlines. Than did: 
-
-```bash
-for i in $(seq 0 9); do echo "$i ----------"; cat "./-file0$i";echo ""; done
-```
-Enter bandit4 user
+I searched about doing for loops in bash, printing variables and printing newlines. Than did: 
 ```bash
 for i in $(seq 0 9); do echo "$i ---------------------------"; cat "./-file0$i";echo ""; done
+```
+
+which outputed
+```bash
 0 ---------------------------
 �/`2ғ�%��rL~5�g��� �����
 1 ---------------------------
