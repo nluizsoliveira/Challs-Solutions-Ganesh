@@ -278,3 +278,22 @@ the only file is `./var/lib/dpkg/info/bandit7.password`, which contains:
 
 ### Ganesh Bandit7 flag: HKBPTKQnIay4Fw76bEy8PVxKEDQRKTzs
 ----------------------------------------------------------------
+## bandit7 -> bandit8
+The password for the next level is stored in the file data.txt next to the word millionth.
+
+The command **grep** can find a string in a file, with the following sintax:
+
+grep 'string' file_path
+
+so
+
+```
+grep 'millionth' data.txt
+```
+
+returns 
+
+### Ganesh bandit8 password: cvX2JJa4CFALtqS87jk27qwqGhBM9plV
+---------------------------------------------------------------
+## bandit8 -> bandit9
+The password for the next level is stored in the file data.txt and is the only line of text that occurs only once
