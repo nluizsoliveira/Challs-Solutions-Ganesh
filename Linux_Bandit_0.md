@@ -13,7 +13,7 @@ Usually SSH connections go by port 22. We need to add an extra option to ssh, wh
 
 
 ```
-ssh bandit0@bandit.labs.overthewire.org -p 22
+ssh bandit0@bandit.labs.overthewire.org -p 2220
 ```
 
 ssh will ask for password (bandit0). You'll start at a folder with an `readme` file. 
@@ -37,7 +37,7 @@ exit
 
 Enter bandit1 user with
 ```
-ssh bandit1@bandit.labs.overthewire.org -p 22
+ssh bandit1@bandit.labs.overthewire.org -p 2220
 ```
 
 There will be a file named
