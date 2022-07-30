@@ -312,6 +312,30 @@ finds the unique line, which is
 ## bandit9 -> bandit10
 A senha para o próximo nível está armazenada no arquivo "data.txt:" em uma das poucas linhas legíveis para humanos (human-readable), é precedida por vários caracteres de ‘=’
 
+according to https://unix.stackexchange.com/questions/217936/equivalent-command-to-grep-binary-files, using strings is better for handling binary data before passing it to grep. Therefore: 
 
+```
+strings data.txt | grep '='
+```
 
-### Gansh bandit9 password: 
+finds
+```
+========== the*2i"4
+=:G e
+========== password
+<I=zsGi
+Z)========== is
+A=|t&E
+Zdb=
+c^ LAh=3G
+*SF=s
+&========== truKLdjsbJ5g7yyJ2X2R0o3a5HQJFuLk
+S=A.H&^
+```
+### Ganesh bandit10 password: truKLdjsbJ5g7yyJ2X2R0o3a5HQJFuLk
+
+---------------------------------------------------------------
+## bandit10 -> bandit11
+The password for the next level is stored in the file data.txt, which contains base64 encoded data
+
+### Ganesh bandit11 password: 
