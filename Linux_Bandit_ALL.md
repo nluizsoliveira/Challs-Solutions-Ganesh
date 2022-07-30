@@ -297,3 +297,21 @@ returns
 ---------------------------------------------------------------
 ## bandit8 -> bandit9
 The password for the next level is stored in the file data.txt and is the only line of text that occurs only once
+
+As found in https://stackoverflow.com/questions/13778273/find-unique-lines, 
+
+```
+sort data.txt | uniq -u 
+```
+
+finds the unique line, which is
+
+### Gansh bandit9 password: UsvVyFSfZZWbi6wgC7dAFyFuR6jQQUhR
+
+---------------------------------------------------------------
+## bandit9 -> bandit10
+A senha para o próximo nível está armazenada no arquivo "data.txt:" em uma das poucas linhas legíveis para humanos (human-readable), é precedida por vários caracteres de ‘=’
+
+
+
+### Gansh bandit9 password: 
