@@ -160,3 +160,52 @@ koReBOKuIDDepwhWk7jZC0RTdopnAYKh
 
 FIle 7 contains the only readable string, which is the password. 
 ### Ganesh bandit4 flag: `koReBOKuIDDepwhWk7jZC0RTdopnAYKh`
+-------------------------------------------------------------------------------------------
+
+## Bandit 5-> 6 (Ganesh bandit6)
+The password for the next level is stored in a file somewhere under the inhere directory and has all of the following properties:
+
+    human-readable
+    1033 bytes in size
+    not executable
+
+
+Enter bandit5 user
+```
+ssh bandit5@bandit.labs.overthewire.org -p 2220
+```
+
+Step 1: Figuring out a wai to find all files under a directory
+- `find .` finds all files under a directory, recursively
+Step 2: Finding all non-executable files under a directory
+- `find` has a param `-perm` that allows searching for permissions. 
+    - `-perm` can be refined through `-` and `/.
+           ```
+
+              find -perm -mode:
+
+              In this case the permission bits mentioned must be present for the file. For example, if you do find -perm -666 and if a file has 776, it will be matched. Similarly 666, 777 etc will be matched too, but 665 won't be matched. In summary, the mentioned (three) bits must be a subset of the permission bits.
+
+              find -perm /mode:
+
+              Here any one bit of subset would do. For example, if we do find -perm /666, and if a file has 644, the file will be matched because the user permission bit is 6, and we are looking for a single bit subset. Similarly, 700, 060, 006 etc will be matched, but not e.g. 444, as no bit contains any subset of the required permission bits.
+          ```
+![](https://danielmiessler.com/images/permissions.png)
+     - I started querying **all executable files by user, group or owner: /111**
+     - `find . -perm -111`
+     - Then **negated** the condition with ! to find not executables.
+     - `find . ! -perm -111`
+- find can also filtrate by size: 
+![](https://i.imgur.com/n12C7kt.png)   
+therefore 
+```bash
+find . -size 1033c ! -perm /111
+./maybehere07/.file2
+```
+was the query utilized. The content of `./maybehere07/.file2` is:
+
+
+
+### Ganesh bandit6 flag: `DXjZPULLxYr17uwoI01bNLQbtFemEgo7`
+
+-------------------------------------------------------------------------------------------
