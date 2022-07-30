@@ -26,8 +26,6 @@ cat readme
 
 the file contains `boJ9jbbUNNfktd78OOpsqOltutMc3MY1`, which is the password for bandit1 user. 
 
-Ganesh's chall is finding bandit2 password, contained in bandit1. 
-
 
 Exit ssh with: 
 
@@ -35,28 +33,4 @@ Exit ssh with:
 exit
 ```
 
-Enter bandit1 user with
-```
-ssh bandit1@bandit.labs.overthewire.org -p 2220
-```
 
-There will be a file named
-```
--
-```
-on bandit1 user initial folder. It's not possible to do:
-
-```
-cat -
-```
-because `-` is a reserved unix word for parameters. After looking up on stackoverflow, I did
-
-```
-cat ./-
-```
-
-which worked. The password is:
-
-```
-CV1DtqXWVFXTvM2F0k09SHz0YwRINYA9
-```
