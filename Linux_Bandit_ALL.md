@@ -526,4 +526,21 @@ cat data8
 
 ### Ganesh bandit13 password: 8ZjyCRiBWFYkneahHwxCv3wb2a1ORpYL
 --------------------------------------------------------------------------
+## bandit13 -> bandit14
+The password for the next level is stored in /etc/bandit_pass/bandit14 and can only be read by user bandit14. For this level, you don’t get the next password, but you get a private SSH key that can be used to log into the next level. Note: localhost is a hostname that refers to the machine you are working on
 
+
+There is a `ssh.private` file on bandit13 home. If we try to `cat  /etc/bandit_pass/bandit14 `, we receive an error, as bandit13 user has no reading permissions for the file. We need to log into `bandit14` user using the `ssh.private`file. 
+
+According to https://unix.stackexchange.com/questions/23291/how-to-ssh-to-remote-server-using-a-private-key, we need to use the `-i` flag on ssh command and pass the private key file. For instance:
+
+```
+ssh -i sshkey.private bandit14@localhost
+```
+
+This will long into `bandit14`. After that, simplye 
+
+```
+cat  /etc/bandit_pass/bandit14
+```
+### Ganesh bandit8 password: 4wcYUJFw0k0XLShlDzztnTBHiqxU3b3e
