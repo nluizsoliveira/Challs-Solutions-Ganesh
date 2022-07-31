@@ -357,8 +357,173 @@ cat data.txt | tr 'A-Za-z' 'N-ZA-Mn-za-m'
 
 ---------------------------------------------------------------
 ## bandit12 -> bandit13
-A senha para o próximo nível está armazenada no arquivo "data.txt", o qual é um "hexdump" de um arquivo que foi comprimido repetidas vezes. Para esse nível pode ser útil criar um diretório na pasta "/tmp". Para isso é possível usar o comando "mkdir", por exemplo: "mkdir /tmp/myname123", e então copiar o arquivo de dados usando "cp", e renomeá-lo usando "mv" (leia as páginas de manual!)
+The password for the next level is stored in the file data.txt, which is a hexdump of a file that has been repeatedly compressed. For this level it may be useful to create a directory under /tmp in which you can work using mkdir. For example: mkdir /tmp/myname123. Then copy the datafile using cp, and rename it using mv (read the manpages!)
 
+It's not possible to write files in current folder. Before everything, we need to copy data.txt to /tmp/bingo
 
-### Ganesh bandit13 password: 
+```
+mkdir /tmp/bingo
+cp data.txt /tmp/bingo
+cd /tmp/bingo
+```
+
+According to https://www.systutorials.com/docs/linux/man/1-xxd/, to reverse a hexdump we need to:
+
+```
+xxd -r data.txt
+```
+
+this will result in: 
+
+```
+P�^data2.bin=��BZh91AY&SY�O����ڞOv���}?��}��^���������ߣ��;�����4���h�F�F��4LM
+                                                                             @��z��FM��C�hF�C@�4@f��h
+4hh��=C%�>X�,�k���1��GY��hPh�Mh
+�J�쌑Oϊ��{RBp�Qix�Y�Z!d��j�(�搿ݳ��/��A�#�A�F��0P��v��`�"3�
+
+                                          ��d�bX?��z��2��<��A �n}
+5(3A��
+      wO�R����6�XS{�
+��9?L�P�yB��=z�m?�L�Nt*�7{qP��̜�%"�w9�qm4�� N3�6���K��H䋑[��}!
+                                                             d��3A4$�M~�\ɠJ�C�kUƦ\���\�FSN��&=�[��q	\)�$:��H�t&/�(����]��BB9<s ��h=
+```
+
+According to https://stackoverflow.com/questions/19120676/how-to-detect-type-of-compression-used-on-the-file-if-no-file-extension-is-spe, it's possible to discover the kind of compression used over a binary filing using `file` command. Before doing that, we need to save the return of reverse-dumping into a file:
+
+```
+xxd -r data.txt > bin
+file bin
+```
+
+That results in: 
+```
+bin: gzip compressed data, was "data2.bin", last modified: Thu May  7 18:14:30 2020, max compression, from Unix
+```
+
+According to https://linuxize.com/post/how-to-unzip-gz-file/, ```gzip -d file.gz``` decompresses a file. 
+
+if we try: 
+
+```
+gzip -d bin
+```
+
+error `gzip: bin: unknown suffix -- ignored` is thrown. According to [ https://www.linuxquestions.org/questions/linux-software-2/gunzip-unknown-suffix-ignored-940698/, using --force forces the decompression. ](https://superuser.com/questions/544153/when-using-gzip-decompress-the-result-is-gzip-myfile-zip-unknown-suffix), gzip only works if file has a `gz` extension. 
+
+We need to rename it first.
+
+```
+mv bin bin.gz
+gzip -d bin.gz
+```
+
+This will make `bin.gz` become a `bin` file. We can use `file` on `bin` again:
+
+```
+file bin
+```
+which results in `bin: bzip2 compressed data, block size = 900k`
+
+According to https://superuser.com/questions/480950/how-to-decompress-a-bz2-file, `bzip2 -d filename.bz2` decompresses a bzip2 compresses file. We need to rename bin again before doing that: 
+
+```
+mv bin bin.bz2
+bzip2 -d bin.bz2
+```
+This will again make `bin.bz2` become a decompressed `bin` file. Using `file` on it reveals:
+
+```
+file bin
+```
+
+```
+bin: gzip compressed data, was "data4.bin", last modified: Thu May  7 18:14:30 2020, max compression, from Unix
+```
+
+Doing again: 
+```
+mv bin bin.gz
+gzip -d bin.gz
+```
+
+results in another `bin` file, which is:
+
+```
+file bin
+```
+
+`bin: POSIX tar archive (GNU)`. 
+
+According to https://stackoverflow.com/questions/15744023/how-to-extract-filename-tar-gz-file, `tar xvf filename.tar` decompresses a .tar file. 
+
+```
+mv bin bin.tar
+tar xvf bin.tar
+```
+
+This will generate a `data5.bin` file. 
+using `file` on it: 
+
+```
+file data5.bin
+```
+results in data5.bin: POSIX tar archive (GNU). Renaming and decompressing it again: 
+
+```
+mv data5.bin data5.tar
+tar xvf data5.tar
+```
+
+Results in a `data6.bin` file. Using `file`:
+
+```
+data6.bin: bzip2 compressed data, block size = 900k
+```
+
+Renaming and De-compressing (again!!!!!):
+
+```
+mv data6 data6.bz2
+bzip2 -d data6.bz2
+```
+
+will result in a `data6` file. Using `file` on it: 
+
+```
+file data6
+```
+returns `data6: POSIX tar archive (GNU)`. Renaming to tar and decompressint (again!!!!!!!!!!!!):
+
+```
+mv data6 data6.tar
+tar xvf data6.tar
+```
+
+results in a `data8` file. Using file on it: 
+
+```
+data8.bin: gzip compressed data, was "data9.bin", last modified: Thu May  7 18:14:30 2020, max compression, from Unix
+```
+
+re-naming and decompressing again: 
+
+```
+mv data8 data8.gz
+gzip -d data8.gz
+```
+
+will result in `data8` file. Using file:
+
+```
+file data8
+data8: ASCII text
+```
+
+finally!!!!:
+```
+cat data8
+```
+
+### Ganesh bandit13 password: 8ZjyCRiBWFYkneahHwxCv3wb2a1ORpYL
+--------------------------------------------------------------------------
 
