@@ -524,7 +524,7 @@ finally!!!!:
 cat data8
 ```
 
-### Ganesh bandit13 password: 8ZjyCRiBWFYkneahHwxCv3wb2a1ORpYL
+### Ganesh bandit12->13 password: 8ZjyCRiBWFYkneahHwxCv3wb2a1ORpYL
 --------------------------------------------------------------------------
 ## bandit13 -> bandit14
 The password for the next level is stored in /etc/bandit_pass/bandit14 and can only be read by user bandit14. For this level, you don’t get the next password, but you get a private SSH key that can be used to log into the next level. Note: localhost is a hostname that refers to the machine you are working on
@@ -543,4 +543,23 @@ This will long into `bandit14`. After that, simplye
 ```
 cat  /etc/bandit_pass/bandit14
 ```
-### Ganesh bandit8 password: 4wcYUJFw0k0XLShlDzztnTBHiqxU3b3e
+### bandit13->14 password: 4wcYUJFw0k0XLShlDzztnTBHiqxU3b3e
+--------------------------------------------------------------------------
+## bandit14 -> bandit15
+The password for the next level can be retrieved by submitting the password of the current level to port 30000 on localhost.
+
+According to https://stackoverflow.com/questions/11564841/send-data-to-a-port-via-linux-command, NC program allows submiting data to a port
+
+According to https://linuxhint.com/send-receive-messages-nc-linux/, we can send text data to a host/port using:
+
+```
+echo [text] | netcat host port```
+```
+
+therefore, 
+```
+echo 4wcYUJFw0k0XLShlDzztnTBHiqxU3b3e | nc localhost 30000
+```
+This returns the password:
+### bandit 14->15 password: BfMYroe26WYalil77FoDi9qh59eK5xNr
+
