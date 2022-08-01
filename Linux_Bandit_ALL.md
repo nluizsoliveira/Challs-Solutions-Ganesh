@@ -563,3 +563,31 @@ echo 4wcYUJFw0k0XLShlDzztnTBHiqxU3b3e | nc localhost 30000
 This returns the password:
 ### bandit 14->15 password: BfMYroe26WYalil77FoDi9qh59eK5xNr
 
+--------------------------------------------------------------------------
+## bandit15 -> bandit16
+The password for the next level can be retrieved by submitting the password of the current level to port 30001 on localhost using SSL encryption.
+
+Helpful note: Getting “HEARTBEATING” and “Read R BLOCK”? Use -ign_eof and read the “CONNECTED COMMANDS” section in the manpage. Next to ‘R’ and ‘Q’, the ‘B’ command also works in this version of that command…
+
+
+According to https://serverfault.com/questions/102032/connecting-to-https-with-netcat-nc, nc cannot estabilish a connction using ssl. However, openssl s_client can, with the following syntax: 
+
+```
+echo [text]| openssl s_client -connect server:443
+```
+
+```
+echo BfMYroe26WYalil77FoDi9qh59eK5xNr | openssl s_client -connect localhost:30001
+```
+
+The servers answer is confusing. To see the actual answer, collin suggests adding a `-ign_eof` flag. 
+
+so, 
+
+```
+echo BfMYroe26WYalil77FoDi9qh59eK5xNr | openssl s_client -ign_eof -connect localhost:30001
+```
+This will display answer in last line: 
+### bandit 15->16 password: cluFn7wTiGryunymYOu4RcffSxQluehd
+
+
