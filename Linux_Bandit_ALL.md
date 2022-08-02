@@ -672,4 +672,4 @@ i got:
 > kfBf3eYk5BPBRzwjqutbbfE887SVc5Yd
 ```
 
-## Bandit 17->18 password: BS8bqB1kqkinKJjuxL6k072Qq9NRwQpR
+## Bandit 17->18 password: kfBf3eYk5BPBRzwjqutbbfE887SVc5Yd
