@@ -672,4 +672,33 @@ i got:
 > kfBf3eYk5BPBRzwjqutbbfE887SVc5Yd
 ```
 
-## Bandit 17->18 password: kfBf3eYk5BPBRzwjqutbbfE887SVc5Yd
+### Bandit 17->18 password: kfBf3eYk5BPBRzwjqutbbfE887SVc5Yd
+-------------------------------------------------------------------------------------
+## Bandit 18->19
+The password for the next level is stored in a file readme in the homedirectory. Unfortunately, someone has modified .bashrc to log you out when you log in with SSH.
+
+According to https://serverfault.com/questions/94503/login-without-running-bash-profile-or-bashrc, all you need to is:
+
+```
+ssh -t username@hostname /bin/sh
+```
+
+This allows bypassing the bashrc. There is a `readme` file on home. After `cat`-ing it:
+
+### Bandit 18->19 password: IueksS7Ubh8G3DCwVzrTd8rAVOwq3M5x
+-------------------------------------------------------------------------------------
+## Bandit 19->20
+To gain access to the next level, you should use the setuid binary in the homedirectory. Execute it without arguments to find out how to use it. The password for this level can be found in the usual place (/etc/bandit_pass), after you have used the setuid binary.
+
+After reading the hint wikipedia article, and experimenting with the file (the script name is very sugestive as well), i noticed the argument is the command you want to run with bandit20 permissions. 
+
+Than, I did
+
+```
+./bandit20-do ls /etc/bandit_pass/bandit20
+./bandit20-do cat /etc/bandit_pass/bandit20
+```
+
+Which returned 
+
+### Bandit 19->20 password: GbKksEFF4yrVs6il55v6gwY5aVje5f0j
